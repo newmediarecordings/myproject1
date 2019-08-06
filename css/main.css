@@ -5,27 +5,38 @@
   body {
     height: 100vh;
     margin: 0;
-    font-family: Helvetica;
+    font-family: monospace;
     color: blue;
     background-color: black;
     grid-auto-columns: auto;
     grid-auto-rows: auto;
     grid-auto-flow: column;
-   
+    position: relative;
+    text-align: center;
+    align-content: center
   }
+
+
 .container {
     display: flex;
+    align-content: center;
+
 }
   
   .square {
 
-    border: 5px solid lightgrey;
+    border: 2px solid lightgrey;
+    background-color: aliceblue;
     text-align: center;
     width: 10vw;
     height: 10vw;
+    margin: 1px;
+    align-content: center;
   }
-  /* .card1 {
-    font-size: 2em;
-    padding-top: 20%;
-    } */
+
+ .button {
+
+    justify-items: center;
+ }
+
   

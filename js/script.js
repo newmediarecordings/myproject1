@@ -34,46 +34,64 @@ document.querySelector('button').addEventListener('click', function() {
     console.log('clicked')
 });
 document.getElementById("square1")
-.addEventListener('click', function() {
-    console.log('clicked square 1') // i really want this to reveal a card. 
+.addEventListener('click', function(evt) {
+    console.log(evt.target.style.backgroundColor)
 });
 document.getElementById("square2")
-.addEventListener('click', function() {
-    console.log('clicked square 2') // i really want this to reveal a card. 
+.addEventListener('click', function(evt) {
+    console.log(evt.target.style.backgroundColor)
 });
 document.getElementById("square3")
-.addEventListener('click', function() {
-    console.log('clicked square 3') // i really want this to reveal a card. 
+.addEventListener('click', function(evt) {
+    console.log(evt.target.style.backgroundColor)
 });
 document.getElementById("square4")
-.addEventListener('click', function() {
-    console.log('clicked square 4') // i really want this to reveal a card. 
+.addEventListener('click', function(evt) {
+    console.log(evt.target.style.backgroundColor)
 });
 document.getElementById("square5")
-.addEventListener('click', function() {
-    console.log('clicked square 5') // i really want this to reveal a card. 
+.addEventListener('click', function(evt) {
+    console.log(evt.target.style.backgroundColor)
 });
 document.getElementById("square6")
-.addEventListener('click', function() {
-    console.log('clicked square 6') // i really want this to reveal a card. 
+.addEventListener('click', function(evt) {
+    console.log(evt.target.style.backgroundColor)
 });
 document.getElementById("square7")
-.addEventListener('click', function() {
-    console.log('clicked square 7') // i really want this to reveal a card. 
+.addEventListener('click', function(evt) {
+    console.log(evt.target.style.backgroundColor)
 });
 document.getElementById("square8")
-.addEventListener('click', function() {
-    console.log('clicked square 8') // i really want this to reveal a card. 
+.addEventListener('click', function(evt) {
+    console.log(evt.target.style.backgroundColor)
 });
-// document.getElementById('.square2').addEventListener('click', function() {
-//     console.log('clicked square') // i really want this to reveal a card. 
-// });
 
+/*function reveal() {
+var x = document.getElementById("square8");
+if (x.style.display === "border") {
+  x.style.display = "block";
+} else {
+  x.style.display = "border";
+}
+}
+reveal ()
+*/
+function newFunction() {
 
+}
+
+document.getElementById("square8").onclick = function() { 
+  
+    document.getElementById("square8").style.display = newFunction(); 
+
+} 
+
+//.addEventListener('click', function(newFunction)
+ //   console.log('grey')
 
 /*----- functions -----*/
-//shuffle cards
-//turn over cards
+//shuffle cards - check!
+//turn over cards or reveal, reveal is fine. 
 
 
 function startTimer() {
@@ -117,14 +135,20 @@ function getRandomInt(max) {
 //let square connects the html id to the cards index array
   function fillColor() {
       for(let i=0; i<8;i++) {
-          let colorIndex = getRandomInt(cards.length)
-          let square=document.getElementById(`square${i+1}`).style.backgroundColor=`${cards[colorIndex].color}`
-        
+          let colorIndex = getRandomInt(cards.length);
+          let square= document.getElementById(`square${i+1}`).style.backgroundColor=`${cards[colorIndex].color}`
+        checkMatch(square)
     } 
   }
   //run this fillColor, is running that function there.
-fillColor()
+fillColor() 
 
-//next up! add event listeners to the cards!
+//matching 
 
-
+function checkMatch(value) {
+    if (value === value) {
+        console.log('match');
+        } else {
+        console.log('no match')
+        }
+    }
