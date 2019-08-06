@@ -1,4 +1,6 @@
 /*----- constants -----*/ 
+//const booleans strings 
+// inside of render function? checkMatch as a function that then call that function when the second card is clicked.
 //cards array, all available cards
 const cards = [ 
     {'color': 'red', 'hexcode': '#ff0000'}, 
@@ -19,6 +21,7 @@ let score;
 let match;
 
 
+
 /*----- cached element references -----*/ 
 //computer needs to remember what was turned over
 //  ''       ''   ''  ''     what cards are still available
@@ -30,10 +33,41 @@ let message = document.querySelector('.message');
 document.querySelector('button').addEventListener('click', function() {
     console.log('clicked')
 });
-
-document.querySelector('.square').addEventListener('click', function() {
-    console.log('clicked square') // i really want this to reveal a card. 
+document.getElementById("square1")
+.addEventListener('click', function() {
+    console.log('clicked square 1') // i really want this to reveal a card. 
 });
+document.getElementById("square2")
+.addEventListener('click', function() {
+    console.log('clicked square 2') // i really want this to reveal a card. 
+});
+document.getElementById("square3")
+.addEventListener('click', function() {
+    console.log('clicked square 3') // i really want this to reveal a card. 
+});
+document.getElementById("square4")
+.addEventListener('click', function() {
+    console.log('clicked square 4') // i really want this to reveal a card. 
+});
+document.getElementById("square5")
+.addEventListener('click', function() {
+    console.log('clicked square 5') // i really want this to reveal a card. 
+});
+document.getElementById("square6")
+.addEventListener('click', function() {
+    console.log('clicked square 6') // i really want this to reveal a card. 
+});
+document.getElementById("square7")
+.addEventListener('click', function() {
+    console.log('clicked square 7') // i really want this to reveal a card. 
+});
+document.getElementById("square8")
+.addEventListener('click', function() {
+    console.log('clicked square 8') // i really want this to reveal a card. 
+});
+// document.getElementById('.square2').addEventListener('click', function() {
+//     console.log('clicked square') // i really want this to reveal a card. 
+// });
 
 
 
