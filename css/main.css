@@ -17,7 +17,7 @@
   }
 
 
-.container {
+.card {
     display: flex;
     align-content: center;
 
@@ -32,11 +32,13 @@
     height: 10vw;
     margin: 1px;
     align-content: center;
+    border-radius: 25px;
   }
 
  .button {
 
     justify-items: center;
  }
+
 
   

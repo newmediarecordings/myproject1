@@ -5,27 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script defer src="./js/script.js"></script>
-    <title>Match the Cards!</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>remember the cards</title>
     
 </head>
 <link rel = "stylesheet"
    type = "text/css"
    href = "css/main.css" />
 <body>
-<h1>Match the Cards!</h1>
-<h2>click the timer to begin.</h2>
+<h1>memory card game.</h1>
+<h2>click the cards and match the colors.</h2>
+<h2>you have one minute.</h2>
 <h2 class="message"></h2>
-<div class = "container">
-    <div class="square" id="square1">1</div>
-    <div class="square" id="square2">2</div>
-    <div class="square" id="square3">3</div>
-    <div class="square" id="square4">4</div>
-    <div class="square" id="square5">5</div>
-    <div class="square" id="square6">6</div>
-    <div class="square" id="square7">7</div>
-    <div class="square" id="square8">8</div>
+<h3 class="score"></h3>
+<div id="timer"></div>
+<section class = "container">
+<div class="card">
+    <div class="square" id="square1"></div>
+    <div class="square" id="square2"></div>
+    <div class="square" id="square3"></div>
+    <div class="square" id="square4"></div>
+    <div class="square" id="square5"></div>
+    <div class="square" id="square6"></div>
+    <div class="square" id="square7"></div>
+    <div class="square" id="square8"></div>
 </div>
-    <button>click here to start</button>
+    <button>start over</button>
 </body>
 </html>
 

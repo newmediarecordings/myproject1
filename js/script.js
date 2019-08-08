@@ -1,113 +1,89 @@
 /*----- constants -----*/ 
+
 //const booleans strings 
 // inside of render function? checkMatch as a function that then call that function when the second card is clicked.
 //cards array, all available cards
 
 const cards = [ 
-    {'color': 'blue', 'hexcode': '#0000ff'},
-    {'color': 'purple', 'hexcode': '#800080'},
-    {'color': 'pink', 'hexcode': '#ffc0cb'},
-    {'color': 'teal', 'hexcode': '#008080'},
-    {'color': 'blue', 'hexcode': '#0000ff'},
-    {'color': 'purple', 'hexcode': '#800080'},
-    {'color': 'pink', 'hexcode': '#ffc0cb'},
-    {'color': 'teal', 'hexcode': '#008080'},
+    {'color': 'blue', 'hexcode': '#0000ff', id: 1},
+    {'color': 'purple', 'hexcode': '#800080', id: 2},
+    {'color': 'pink', 'hexcode': '#ffc0cb', id: 3},
+    {'color': 'teal', 'hexcode': '#008080', id: 4},
+    {'color': 'blue', 'hexcode': '#0000ff', id: 5}, 
+    {'color': 'purple', 'hexcode': '#800080', id: 6},
+    {'color': 'pink', 'hexcode': '#ffc0cb', id: 7},
+    {'color': 'teal', 'hexcode': '#008080', id: 8},
 ];
 
-console.log(cards);
 
 /*----- app's state (variables) -----*/ 
 let winner;
+let matchCount;
 let score;
 let match;
+let timer;
 let guesses;
+let bouncer = [];
+
+
 
 /*----- cached element references -----*/ 
 //computer needs to remember what was turned over
 //  ''       ''   ''  ''     what cards are still available
 // which cards match and keep score.
 
+let timerElement = document.querySelector('#timer');
 let message = document.querySelector('.message');
-
+let scoreMessage = document.querySelector('.score');
+const squares = document.querySelectorAll('.square');
 /*----- event listeners -----*/ 
+
+
 document.querySelector('button').addEventListener('click', function() {
-    console.log('clicked')
+    window.location.reload(true)
 });
+
 document.getElementById("square1")
 .addEventListener('click', function(evt) {
-    console.log(evt.target.style.backgroundColor)
-    checkMatch(evt.target.style.backgroundColor)
+    checkMatch(evt.target)
 });
 document.getElementById("square2")
 .addEventListener('click', function(evt) {
-    console.log(evt.target.style.backgroundColor)
-    checkMatch(evt.target.style.backgroundColor)
+    checkMatch(evt.target)
 });
 document.getElementById("square3")
 .addEventListener('click', function(evt) {
-    console.log(evt.target.style.backgroundColor)
-    checkMatch(evt.target.style.backgroundColor)
+    checkMatch(evt.target)
 });
 document.getElementById("square4")
 .addEventListener('click', function(evt) {
-    console.log(evt.target.style.backgroundColor)
-    checkMatch(evt.target.style.backgroundColor)
+    checkMatch(evt.target)
 });
 document.getElementById("square5")
 .addEventListener('click', function(evt) {
-    console.log(evt.target.style.backgroundColor)
-    checkMatch(evt.target.style.backgroundColor)
+    checkMatch(evt.target)
 });
 document.getElementById("square6")
 .addEventListener('click', function(evt) {
-    console.log(evt.target.style.backgroundColor)
-    checkMatch(evt.target.style.backgroundColor)
+    checkMatch(evt.target)
 });
 document.getElementById("square7")
 .addEventListener('click', function(evt) {
-    console.log(evt.target.style.backgroundColor)
-    checkMatch(evt.target.style.backgroundColor)
+    checkMatch(evt.target)
 });
 document.getElementById("square8")
 .addEventListener('click', function(evt) {
-    console.log(evt.target.style.backgroundColor)
-    checkMatch(evt.target.style.backgroundColor)
+    checkMatch(evt.target)
 });
 
-/*function reveal() {
-var x = document.getElementById("square8");
-if (x.style.display === "border") {
-  x.style.display = "block";
-} else {
-  x.style.display = "border";
-}
-}
-reveal ()
-*/
 
-function newFunction() {
 
-}
-
-document.getElementById("square8").onclick = function() { 
-  
-    document.getElementById("square8").style.display = newFunction(); 
-
-} 
-
-//.addEventListener('click', function(newFunction)
- //   console.log('grey')
 
 /*----- functions -----*/
 //shuffle cards - check!
 //turn over cards or reveal, reveal is fine. 
 
-function startTimer() {
-    if(timer === 0) return;
-    timer = timer - 1000
-    render();
-    return startTimer();
-}
+
 
 function shuffle (array) {
     var currentIndex = array.length;
@@ -125,32 +101,35 @@ function shuffle (array) {
     return array;
 };
 
-init();
-function init() {
-    winner = null;
-   // timer = 60000;
-    guesses = [];
-   // render();
-   shuffle(cards)
-}
-//this is the timer
-let timer = 60000
+
+
 function updateTimer() {
-    if(timer === 0) {
-        console.log('Timer Finished');
-        return;
+    if(timer === 0 && matchCount != 4) {
+        alert('Time is up!');
+        return window.location.reload();
     }
     timer -= 1000
     let minutes = Math.floor(timer / 60000);
       let seconds = ((timer % 60000) / 1000).toFixed(0);
-    // This is where we call render
-    console.log(`
-    ${minutes}:${(seconds < 10 ? '0' : '')}${seconds}
-    `)
+      // This is where we call render
+    timerElement.textContent = minutes + ":" + seconds; 
     setTimeout(function() {
         return updateTimer();
     }, 1000)
 }
+
+init();
+function init() {
+    winner = null;
+    timer = 60000;
+    guesses = [];
+    bouncer = [];
+    matchCount = 0;
+    updateTimer();
+    fillColor(shuffle(cards)); 
+   
+}
+
 //boilerplate random generator
 
 //the for loop first starts at zero, then adds one eachtime it goes through the function
@@ -160,26 +139,55 @@ function updateTimer() {
   function fillColor(cardsArr) {
     // for loop or higher order arr
         for ( let i = 0; i < cardsArr.length; i++ ) {
-            document.getElementById(`square${i+1}`).style.backgroundColor=`${cards[i].color}`
+            document.getElementById(`square${i+1}`).dataset.color=`${cards[i].color}`
         }
-       // checkMatch(square)
     } 
 
-  //run this fillColor, is running that function there.
-fillColor(cards) 
 
-//matching 
 
-function checkMatch(oneguess) {
-    if (guesses.length<1) {
-        guesses.push(oneguess)
+function checkMatch(element) {
+    if (guesses.length === 0 && guesses.length != 2) {
+        element.style.backgroundColor = element.dataset.color;
+        guesses.push(element);
+    } else if(guesses[0].id === element.id){
+        return alert("Sorry, you can't choose the same square twice");
     } else {
-        if (oneguess === guesses[0]) {
-            alert("this is match")
-            guesses = []
+        if (element.dataset.color === guesses[0].dataset.color){
+            element.style.backgroundColor = element.dataset.color;
+            setTimeout(function(){
+                alert("This is a match");
+                matchCount++
+                return disableCard(element);
+            }, 500)
         } else {
-            alert("this is not a match")
-            guesses = []
+            element.style.backgroundColor = element.dataset.color;
+            setTimeout(function(){
+                alert("this is not a match");
+                return flip(element);
+            }, 500)
+            
         }
     }
+}
+
+function flip(el) {
+    el.style.backgroundColor = "white";
+    guesses[0].style.backgroundColor = "white";
+    guesses = [];
+}
+
+function disableCard(el) {
+    el.style.backgroundColor = "grey";
+    guesses[0].style.backgroundColor = "grey";
+    guesses = []
+    scoreMessage.innerHTML = `You've Matched ${matchCount} pairs`;
+    return checkWin()
+}
+
+
+function checkWin() {
+   if(matchCount === 4) {
+       alert('You Matched All the Tiles');
+       window.location.reload();
+   }
 }
