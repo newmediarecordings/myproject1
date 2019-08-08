@@ -1,7 +1,5 @@
 /*----- constants -----*/ 
 
-//const booleans strings 
-// inside of render function? checkMatch as a function that then call that function when the second card is clicked.
 //cards array, all available cards
 
 const cards = [ 
@@ -15,7 +13,6 @@ const cards = [
     {'color': 'teal', 'hexcode': '#008080', id: 8},
 ];
 
-
 /*----- app's state (variables) -----*/ 
 let winner;
 let matchCount;
@@ -25,17 +22,13 @@ let timer;
 let guesses;
 let bouncer = [];
 
-
-
 /*----- cached element references -----*/ 
-//computer needs to remember what was turned over
-//  ''       ''   ''  ''     what cards are still available
-// which cards match and keep score.
 
 let timerElement = document.querySelector('#timer');
 let message = document.querySelector('.message');
 let scoreMessage = document.querySelector('.score');
 const squares = document.querySelectorAll('.square');
+
 /*----- event listeners -----*/ 
 
 
@@ -171,8 +164,8 @@ function checkMatch(element) {
 }
 
 function flip(el) {
-    el.style.backgroundColor = "white";
-    guesses[0].style.backgroundColor = "white";
+    el.style.backgroundColor = "aliceblue";
+    guesses[0].style.backgroundColor = "aliceblue";
     guesses = [];
 }
 
