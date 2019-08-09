@@ -14,13 +14,14 @@ const cards = [
 ];
 
 /*----- app's state (variables) -----*/ 
+
 let winner;
 let matchCount;
 let score;
 let match;
 let timer;
 let guesses;
-let bouncer = [];
+//let bouncer = [];
 
 /*----- cached element references -----*/ 
 
@@ -28,9 +29,9 @@ let timerElement = document.querySelector('#timer');
 let message = document.querySelector('.message');
 let scoreMessage = document.querySelector('.score');
 const squares = document.querySelectorAll('.square');
+var matched = document.getElementById('match')
 
 /*----- event listeners -----*/ 
-
 
 document.querySelector('button').addEventListener('click', function() {
     window.location.reload(true)
@@ -69,14 +70,7 @@ document.getElementById("square8")
     checkMatch(evt.target)
 });
 
-
-
-
 /*----- functions -----*/
-//shuffle cards - check!
-//turn over cards or reveal, reveal is fine. 
-
-
 
 function shuffle (array) {
     var currentIndex = array.length;
@@ -94,11 +88,9 @@ function shuffle (array) {
     return array;
 };
 
-
-
 function updateTimer() {
     if(timer === 0 && matchCount != 4) {
-        alert('Time is up!');
+        document.getElementById("matched").innerHTML = `time's up!`;
         return window.location.reload();
     }
     timer -= 1000
@@ -139,23 +131,24 @@ function init() {
 
 
 function checkMatch(element) {
+    document.getElementById("matched").innerHTML = ``;
     if (guesses.length === 0 && guesses.length != 2) {
         element.style.backgroundColor = element.dataset.color;
         guesses.push(element);
     } else if(guesses[0].id === element.id){
-        return alert("Sorry, you can't choose the same square twice");
+        return document.getElementById("matched").innerHTML = `Sorry, you can't choose the same square twice`;
     } else {
         if (element.dataset.color === guesses[0].dataset.color){
             element.style.backgroundColor = element.dataset.color;
             setTimeout(function(){
-                alert("This is a match");
+                document.getElementById("matched").innerHTML = `This is a match`;
                 matchCount++
                 return disableCard(element);
             }, 500)
         } else {
             element.style.backgroundColor = element.dataset.color;
             setTimeout(function(){
-                alert("this is not a match");
+                document.getElementById("matched").innerHTML = `This is not a match`;
                 return flip(element);
             }, 500)
             
@@ -170,17 +163,21 @@ function flip(el) {
 }
 
 function disableCard(el) {
-    el.style.backgroundColor = "grey";
-    guesses[0].style.backgroundColor = "grey";
+    el.style.backgroundColor = "black";
+    guesses[0].style.backgroundColor = "black";
     guesses = []
-    scoreMessage.innerHTML = `You've Matched ${matchCount} pairs`;
+    scoreMessage.innerHTML = `you've Matched ${matchCount} pairs`;
     return checkWin()
 }
 
 
 function checkWin() {
    if(matchCount === 4) {
-       alert('You Matched All the Tiles');
+    document.getElementById("won").innerHTML = `YOU WIN!`;
+    setTimeout(function(){
        window.location.reload();
+    }, 10000)
    }
+
 }
+
