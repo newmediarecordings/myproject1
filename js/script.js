@@ -21,7 +21,6 @@ let score;
 let match;
 let timer;
 let guesses;
-//let bouncer = [];
 
 /*----- cached element references -----*/ 
 
@@ -72,6 +71,7 @@ document.getElementById("square8")
 
 /*----- functions -----*/
 
+//shuffle
 function shuffle (array) {
     var currentIndex = array.length;
     var temporaryValue, randomIndex;
@@ -88,11 +88,14 @@ function shuffle (array) {
     return array;
 };
 
+//Timer
+
 function updateTimer() {
     if(timer === 0 && matchCount != 4) {
         document.getElementById("matched").innerHTML = `time's up!`;
         return window.location.reload();
     }
+    //the math to countdown the seconds
     timer -= 1000
     let minutes = Math.floor(timer / 60000);
       let seconds = ((timer % 60000) / 1000).toFixed(0);
@@ -101,34 +104,27 @@ function updateTimer() {
     setTimeout(function() {
         return updateTimer();
     }, 1000)
-}
+} 
 
 init();
 function init() {
     winner = null;
     timer = 60000;
     guesses = [];
-    bouncer = [];
     matchCount = 0;
     updateTimer();
     fillColor(shuffle(cards)); 
-   
 }
 
-//boilerplate random generator
-
-//the for loop first starts at zero, then adds one eachtime it goes through the function
-//colorindex gets a random integer based on the card array's length
-//let square connects the html id to the cards index array
+//fill color by id
 
   function fillColor(cardsArr) {
-    // for loop or higher order arr
         for ( let i = 0; i < cardsArr.length; i++ ) {
             document.getElementById(`square${i+1}`).dataset.color=`${cards[i].color}`
         }
     } 
 
-
+//match, no match, and keeping someone from clicking the same card twice
 
 function checkMatch(element) {
     document.getElementById("matched").innerHTML = ``;
@@ -150,8 +146,7 @@ function checkMatch(element) {
             setTimeout(function(){
                 document.getElementById("matched").innerHTML = `This is not a match`;
                 return flip(element);
-            }, 500)
-            
+            }, 500) 
         }
     }
 }
@@ -162,6 +157,8 @@ function flip(el) {
     guesses = [];
 }
 
+//disable clicking on matched squares
+
 function disableCard(el) {
     el.style.backgroundColor = "black";
     guesses[0].style.backgroundColor = "black";
@@ -170,6 +167,7 @@ function disableCard(el) {
     return checkWin()
 }
 
+// you win message 
 
 function checkWin() {
    if(matchCount === 4) {
@@ -178,6 +176,5 @@ function checkWin() {
        window.location.reload();
     }, 10000)
    }
-
 }
 
